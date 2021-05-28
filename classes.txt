@@ -1,0 +1,59 @@
+void main() {
+  var a = personControll();
+  var customer1 =  Customer(iq: 1200, name: "ozan");
+  Customer customer2 = Customer(name: "Kuzey", iq: 1199);
+  Person p1 = Customer(name: "Peyker", iq: 123124);
+
+  customer2.name=customer1.name;
+  customer1.name="sada";
+
+  a.printAll(customer2);
+  a.printAll(customer1);
+  a.printAll(p1);
+}
+
+class customerMenager {
+  void hi(Customer customer) {
+    print("hello from custom menager" + customer.name);
+  }
+
+  void printName(Customer customer) {
+    print("Name: " + customer.name);
+  }
+
+  void printAll(Customer customer) {
+    print("Name: " + customer.name);
+    print("IQ: " + customer.iq.toString());
+  }
+
+  void printIq(Customer customer) {
+    print("Iq: " + customer.iq.toString());
+  }
+
+  void printWhatweHave(Customer customer) {
+    if (customer.name != null) printName(customer);
+    if (customer.iq != null) printIq(customer);
+  }
+}
+
+class Customer extends Person {
+  Customer({String name, int iq}) {
+    this.name = name;
+    this.iq = iq;
+  }
+}
+
+class Personel extends Person {
+  double maas;
+}
+
+class Person {
+  String name;
+  int iq;
+}
+class personControll{
+  void printAll(Person p) {
+print("Name: " + p.name);
+print("IQ: " + p.iq.toString());
+}
+}

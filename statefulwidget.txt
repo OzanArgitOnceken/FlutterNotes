@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp("Başlsdfadsık"));
+}
+
+class MyApp extends StatelessWidget {
+  String tit;
+
+  MyApp(this.tit);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Skeffold("annenn"),
+    );
+  }
+}
+
+class Skeffold extends StatefulWidget {
+  String tit;
+  int sayac=0;
+
+  Skeffold(this.tit);
+
+  @override
+  State <StatefulWidget> createState(){
+    debugPrint("Skeffoldda");
+    return (SkeffoldState());
+
+  }
+}
+
+class SkeffoldState extends State<Skeffold> {
+  @override
+  Widget build(BuildContext context) {
+    return(Scaffold(
+      appBar: AppBar(
+        title: Text(widget.tit),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          debugPrint("onpressede girdi");
+          setState(() {
+            debugPrint("Setstateye girdi");
+            widget.sayac++;
+          });
+          debugPrint("Setstateden çıktı\n onpresseddan cıktı");
+        },
+        child: Icon(Icons.add_circle_outline),
+      ),
+      body:Center(child:  Text("Buraya ${widget.sayac} kere dokundun"),)
+    ));
+  }
+}

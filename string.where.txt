@@ -1,0 +1,8 @@
+void main() {
+  var sehir=["adana","kars","Eskişehie"];
+  print (sehir);
+  print(sehir.where((sa)=>sa.contains("ka")));
+  sehir.add("kastamonu");
+  print(sehir);
+  print(sehir.where((x)=>x.contains("ka")));
+}

@@ -1,0 +1,46 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: myApp()));
+}
+
+class myApp extends StatelessWidget {
+  @override
+  int og_not = 1;
+  Widget build(BuildContext context) {
+    var adamlar = ["ali", "veli", "cengo"];
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Petland Veteriner Kliniği"),
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: ListView.builder(itemCount: adamlar.length,itemBuilder: (BuildContext context, int index){
+                    return Text(adamlar[index]);
+                }),
+              ),
+            ),
+            Center(
+                child: RaisedButton(
+              child: Text("SONUCU GOR"),
+              onPressed: () {
+                String mesaj = "";
+                if (og_not >= 65)
+                  mesaj = "Gecti!";
+                else
+                  mesaj = "Moron";
+                var alert = AlertDialog(
+                  title: Text("Sinav sonucu"),
+                  content: Text(mesaj),
+                );
+                showDialog(
+                    context: context, builder: (BuildContext context) => alert);
+              },
+            )),
+          ],
+        ));
+  }
+}

@@ -1,0 +1,175 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:trashphone/models/Customer_Personel_Class.dart';
+
+void main() {
+  runApp(myApp());
+}
+
+// ignore: camel_case_types
+class myApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Petland Veteriner Kliniği"),
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: Listem(),
+            ),
+            Row(
+              children: [
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child:YeniMusteri(),
+                ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child:GuncelleMusteri(),
+                ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child:SilMusteri(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
+class YeniMusteri extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      color: Colors.lightGreenAccent,
+      child: Row(
+        children:<Widget> [
+          Text("Yeni Müşteri"),
+          Icon(Icons.add),
+        ],
+      ),
+      onPressed: () {
+        var alert = AlertDialog(
+          title: Text("Sinav sonucu"),
+          content: Text("mesaj"),
+        );
+        showDialog(context: context, builder: (BuildContext context) => alert);
+      },
+    );
+  }
+}
+class GuncelleMusteri extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Row(
+        children: <Widget>[
+          Text("Güncelle"),
+
+          SizedBox(width: 6.0,),
+          Icon(Icons.update),
+        ],
+      ),
+      onPressed: () {
+        var alert = AlertDialog(
+          title: Text("Sinav sonucu"),
+          content: Text("mesaj"),
+        );
+        showDialog(context: context, builder: (BuildContext context) => alert);
+      },
+    );
+  }
+}
+class SilMusteri extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      color: Colors.redAccent,
+      child: Row(
+        children: [
+          Text("Sil"),
+          SizedBox(width: 20.0,),
+          Icon(Icons.delete_forever),
+        ],
+      ),
+      onPressed: () {
+        var alert = AlertDialog(
+
+          title: Text("Sinav sonucu"),
+          content: Text("mesaj"),
+        );
+        showDialog(context: context, builder: (BuildContext context) => alert);
+      },
+    );
+  }
+}
+
+class Listem extends StatefulWidget {
+  @override
+  _ListemState createState() => _ListemState();
+}
+
+class _ListemState extends State<Listem> {
+  String chosen = "";
+  List<customer> customers = [
+    customer(
+        fullName: "Ali Kaya", ucret: 98.7, petName: "Dragon", asigunu: 2.2),
+    customer(
+        fullName: "Aycan baş", ucret: 88.5, petName: "Kapya", asigunu: 12.2),
+    customer(
+        fullName: "Veli Dibektaş", ucret: 0, petName: "Sivri", asigunu: 5.1)
+  ];
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: Center(
+              child: ListView.builder(
+                  itemCount: customers.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(customers[index].profilepic),
+                      ),
+                      title: Text(customers[index].fullName +
+                          "-" +
+                          customers[index].petName),
+                      trailing: buildIcon(customers[index].asigunu),
+                      subtitle: Text("Aşıya kalan gün sayısı:" +
+                          customers[index].asigunu.toString() +
+                          "\nBorcunuz:" +
+                          customers[index].ucret.toString() +
+                          "₺"),
+                      onTap: () {
+                        setState(() {
+                          chosen = customers[index].fullName;
+                        });
+                      },
+                    );
+                  })),
+        ),
+        Text("Secili müşteri: " + chosen),
+      ],
+    );
+  }
+}
+
+Widget buildIcon(var kalanGun) {
+  if (kalanGun < 3)
+    return Icon(Icons.warning);
+  else if (kalanGun < 7)
+    return Icon(Icons.done);
+  else
+    return Icon(Icons.done_all);
+}

@@ -1,0 +1,14 @@
+void main(){
+  List<product> pro=[product(name: "TV",price: 89.9),product(name: "ampul",price: 999.8),product(name: "saksı",price: 12)];
+  print(pro[0].price.toString());
+}
+class product
+{
+  String name;
+  double price;
+  product({String name,double price})
+  {
+    this.name=name;
+    this.price=price;
+  }
+}
